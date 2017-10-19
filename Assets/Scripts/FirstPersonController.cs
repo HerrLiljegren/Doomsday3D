@@ -28,12 +28,12 @@ public class FirstPersonController : MonoBehaviour
         }
         
         // Rotation
-        float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
-        transform.Rotate(0.0f, horizontalRotation, 0.0f);
+        //float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
+        //transform.Rotate(0.0f, horizontalRotation, 0.0f);
 
-        verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        verticalRotation = Mathf.Clamp(verticalRotation, -verticalAngleLimit, verticalAngleLimit);
-        Camera.main.transform.localRotation= Quaternion.Euler(verticalRotation, 0.0f, 0.0f);
+        // verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        // verticalRotation = Mathf.Clamp(verticalRotation, -verticalAngleLimit, verticalAngleLimit);        
+        // Camera.main.transform.localRotation= Quaternion.Euler(verticalRotation, 0.0f, 0.0f);
 
         // Movement
         _velocity.x = Input.GetAxis("Horizontal") * movementSpeed; // Forward speed
