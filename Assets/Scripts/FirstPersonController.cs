@@ -15,6 +15,8 @@ public class FirstPersonController : MonoBehaviour
 
     private Vector3 _velocity = Vector3.zero;
 
+    public float angle;
+
     // Use this for initialization
     void Start () {        
         _characterController = GetComponent<CharacterController>();        
@@ -26,7 +28,29 @@ public class FirstPersonController : MonoBehaviour
         {
             lockCursor = !lockCursor;            
         }
-        
+
+
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+
+        if(groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);            
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+        }
+
+
+        //var pos = Input.mousePosition;
+        //pos.z = 5.23f;
+        //var obj = Camera.main.WorldToScreenPoint(transform.position);
+        //pos.x = pos.x - obj.x;
+        //pos.y = pos.y - obj.y;
+        //angle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(new Vector3(0, -angle+90, 0));
+        //Debug.Log(pos);
+
         // Rotation
         //float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
         //transform.Rotate(0.0f, horizontalRotation, 0.0f);
@@ -51,7 +75,7 @@ public class FirstPersonController : MonoBehaviour
             _velocity.x /= 2;
         }       
          
-        _characterController.Move(transform.rotation * _velocity * Time.deltaTime);        
+        _characterController.Move(_velocity * Time.deltaTime);        
     }
 
     private void OnGUI()
