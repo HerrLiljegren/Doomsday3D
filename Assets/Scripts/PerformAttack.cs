@@ -5,9 +5,10 @@ using UnityEngine;
 public class PerformAttack : MonoBehaviour {
 
     public float range = 100.0f;
-    public float cooldown = 0.5f; 
-    public float cooldownRemaining = 0;
+    public float cooldown = 0f; 
+    public float cooldownRemaining = 10;
     public GameObject debrisPrefab;
+    public GameObject muzzle;
 
 	// Use this for initialization
 	void Start () {        
@@ -20,18 +21,24 @@ public class PerformAttack : MonoBehaviour {
 		if(Input.GetMouseButton(0) && cooldownRemaining <= 0)
         {
             cooldownRemaining = cooldown;
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
+            
             RaycastHit hitInfo;
             if(Physics.Raycast(ray, out hitInfo, range))
             {
                 Vector3 hitPoint = hitInfo.point;
-                Debug.Log("Hit Point: " + hitPoint);
+                // Debug.Log("Hit Point: " + hitPoint);
                 GameObject go = hitInfo.collider.gameObject;
-                Debug.Log("Game object: " + go);
+                // Debug.Log("Game object: " + go);
                 if (debrisPrefab != null)
                 {
-                    Instantiate(debrisPrefab, hitPoint, hitInfo.transform.rotation);
+                    var direction = (muzzle.transform.position - hitInfo.point).normalized;
+                    var lookRotation = Quaternion.LookRotation(hitInfo.normal);
+                    Instantiate(debrisPrefab, hitPoint, lookRotation);
                 }
+
+                Debug.DrawLine(ray.origin, hitPoint, Color.red);
+                Debug.Log("Origin: " + ray.origin + ", Hitpoint: " + hitPoint);
             }
         }
 	}

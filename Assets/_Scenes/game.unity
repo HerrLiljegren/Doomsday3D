@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -112,6 +112,34 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &814756659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 814756660}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &814756660
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 814756659}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.026, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 816324448}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &816324447
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +151,7 @@ GameObject:
   - component: {fileID: 816324451}
   - component: {fileID: 816324450}
   - component: {fileID: 816324449}
+  - component: {fileID: 816324452}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -139,7 +168,8 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0, z: 0.649}
   m_LocalScale: {x: 0.2, y: 0.25, z: 0.2}
-  m_Children: []
+  m_Children:
+  - {fileID: 814756660}
   m_Father: {fileID: 1895845102}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -197,6 +227,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 816324447}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &816324452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 816324447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc65fa3a5101dc9489ab0636bb18a223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 100
+  cooldown: 0.1
+  cooldownRemaining: 0
+  debrisPrefab: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d,
+    type: 2}
+  muzzle: {fileID: 814756659}
 --- !u!1 &958512770
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1895845102}
   smoothSpeed: 2
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 3.85, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   velocityf: 0
 --- !u!114 &1119945890
@@ -379,7 +426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1895845102}
   cameraSpeed: 15
-  offset: {x: 0, y: 15, z: -5}
+  offset: {x: 0, y: 2, z: -5}
   smoothFollow: 1
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1119945891
@@ -623,7 +670,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1593840665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 533.5, y: 159, z: 0}
+  m_LocalPosition: {x: 220, y: 267, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1376617593}
@@ -755,7 +802,6 @@ GameObject:
   - component: {fileID: 1895845102}
   - component: {fileID: 1895845101}
   - component: {fileID: 1895845103}
-  - component: {fileID: 1895845104}
   - component: {fileID: 1895845106}
   - component: {fileID: 1895845105}
   m_Layer: 0
@@ -812,21 +858,6 @@ MonoBehaviour:
   verticalAngleLimit: 60
   jumpSpeed: 5
   angle: 0
---- !u!114 &1895845104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1895845100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc65fa3a5101dc9489ab0636bb18a223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 100
-  cooldown: 0.5
-  cooldownRemaining: 0
-  debrisPrefab: {fileID: 0}
 --- !u!23 &1895845105
 MeshRenderer:
   m_ObjectHideFlags: 0
