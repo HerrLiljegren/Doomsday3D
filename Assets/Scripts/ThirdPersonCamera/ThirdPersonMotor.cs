@@ -11,7 +11,7 @@ public class ThirdPersonMotor : MonoBehaviour
         Instance = this;
     }
 
-    void UpdateMotor()
+    public void UpdateMotor()
     {
         SnapAlignCharacterWithCamera();
         ProcessMotion();
